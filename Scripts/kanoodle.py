@@ -10,6 +10,8 @@ figure_rect = pygame.Rect(0, 0, BLOCK_SIZE, BLOCK_SIZE)
 # Create a grid
 grid = [pygame.Rect(X_MARGIN + (MARGIN + BLOCK_SIZE) * x, Y_MARGIN + (MARGIN + BLOCK_SIZE) * y, BLOCK_SIZE, BLOCK_SIZE) for x in range(W) for y in range(H)]
 
+# Create a grid of circles for the board
+
 # Create an empty field
 field = [[0 for i in range(W)] for j in range(H)]
 

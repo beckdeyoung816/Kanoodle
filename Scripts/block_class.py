@@ -137,21 +137,15 @@ class block():
     def rotate(self, direction, field):
         rects_old = deepcopy(self.rects)
         coords_old = deepcopy(self.coords)
-        print(f'Old coords: {self.coords}')
-        print(f"Old rects: {self.rects}")
-        print(f'dx: {self.dx}, dy: {self.dy}')
+
         if direction == "CW":
             self.rotate_clockwise()
         elif direction == "CCW":
             self.rotate_counterclockwise()
 
-        print(f"Pre-border coords: {self.coords}")
-        print(f"Pre-border rects: {self.rects}")
         if not self.check_borders(field):
             self.rects = rects_old
             self.coords = coords_old
-        print(f'New coords: {self.coords}')
-        print("")
 
     def rotate_clockwise(self):
         print("Rotating Clockwise")
