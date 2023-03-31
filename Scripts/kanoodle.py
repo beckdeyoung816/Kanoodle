@@ -1,21 +1,14 @@
 import pygame
 from block_class import block
-from config import BLACK, WHITE, GRAY, COLORS, W, H, BLOCK_SIZE, MARGIN, RES_W, RES_H, X_MARGIN, Y_MARGIN, BOARD_WIDTH
-
-# Create blocks
-blocks = [block(color) for color in COLORS]
-
-figure_rect = pygame.Rect(0, 0, BLOCK_SIZE, BLOCK_SIZE)
+from config import BLACK, WHITE, GRAY, COLORS, W, H, BLOCK_SIZE, \
+    MARGIN, RES_W, RES_H, X_MARGIN, Y_MARGIN, BOARD_WIDTH, \
+        BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_SPACING, FONT_SIZE
 
 # Create a grid
 grid = [pygame.Rect(X_MARGIN + (MARGIN + BLOCK_SIZE) * x, Y_MARGIN + (MARGIN + BLOCK_SIZE) * y, BLOCK_SIZE, BLOCK_SIZE) for x in range(W) for y in range(H)]
 
-# Create a grid of circles for the board
-
 # Create an empty field
 field = [[0 for i in range(W)] for j in range(H)]
-
-figure = blocks[0]
 
 # Initialize Pygame
 pygame.init()
@@ -26,12 +19,6 @@ sc = pygame.display.set_mode((RES_W, RES_H))
 clock = pygame.time.Clock()
 pygame.display.set_caption("Kanoodle")
 
-# Create buttons
-# define constants
-BUTTON_WIDTH = 100
-BUTTON_HEIGHT = 40
-BUTTON_SPACING = 10
-FONT_SIZE = 10
 # create font object
 font = pygame.font.SysFont('Arial', FONT_SIZE)
 
@@ -47,7 +34,9 @@ for i, color in enumerate(COLORS):
     button_text = font.render(color, True, (0, 0, 0))
     buttons.append((button_rect, button_text, color))
 
-# Loop until the user clicks the close button
+# Create the first block
+figure = block(COLORS[0])
+
 while True:
     dx, dy = 0, 0
     sc.fill(pygame.Color('black'))
@@ -89,6 +78,7 @@ while True:
     figure.shift(dx, dy, field)
         
     # Draw the figure
+    figure_rect = pygame.Rect(0, 0, BLOCK_SIZE, BLOCK_SIZE)
     for i in range(len(figure.rects)):
         figure_rect.x = X_MARGIN + figure.rects[i].x * (BLOCK_SIZE + MARGIN)
         figure_rect.y = Y_MARGIN + figure.rects[i].y * (BLOCK_SIZE + MARGIN) 
@@ -96,7 +86,6 @@ while True:
         
         # Update the field
         #field[figure.rects[i].y][figure.rects[i].x] = 1
-
             
     pygame.display.flip()
     clock.tick()

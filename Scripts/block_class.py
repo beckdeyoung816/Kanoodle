@@ -3,8 +3,7 @@ from config import BLACK, WHITE, GRAY, W, H, BLOCK_SIZE, MARGIN, RES_W, RES_H, X
 from copy import deepcopy
 import numpy as np
 
-
-## Write a class for a Kanoodle block
+## Class for a Kanoodle block
 class block():
     def __init__(self, color):
         self.color = color
@@ -79,14 +78,6 @@ class block():
         self.orientation = 1
         self.board_coords = self.coords
     
-    def set_orientation(self):
-        self.height = max([y for x,y in self.coords])
-        self.width = max([x for x,y in self.coords])
-        self.x_mid = self.width // 2
-        self.y_mid = self.height // 2
-        
-    
-    
     def check_borders(self, field):
         for i in range(len(self.rects)):
             x = self.rects[i].x
@@ -158,12 +149,4 @@ class block():
         self.coords = [(-y, x) for x,y in self.coords]
         for rect, new_coord in zip(self.rects, self.coords):
              rect.x, rect.y = new_coord[0] + self.dx, new_coord[1] + self.dy
-
-            
-    # Reflect about the y-axis
-    def flip_y(self):
-        for i in range(len(self.rects)):
-            self.rects[i].y = self.height - self.rects[i].y - 1
-
-        self.set_orientation()
 
